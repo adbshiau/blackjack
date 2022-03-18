@@ -1,0 +1,63 @@
+body {
+  background-color: white;
+  font-family: "Press Start 2P", cursive;
+  margin: auto;
+  width: 70%;
+  padding: 50px;
+}
+
+main {
+  background-color: #00741b;
+  display: grid;
+  grid-template-rows: 1fr 30px 3fr 3fr 1fr 30px;
+  text-align: center;
+  width: 500px;
+}
+
+#dealers-sum {
+  align-items: end;
+}
+
+.dealers-side {
+  background-color: #00741b;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.players-side {
+  background-color: #00741b;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.stand-area {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+#players-sum {
+  display: flex;
+  align-items: center;
+}
+
+#stand-button {
+  background-color: #0088ff;
+
+  color: white;
+  padding: 1vmin;
+  border-radius: 2vmin;
+  cursor: pointer;
+  border: 0.3vmin solid white;
+  font-family: "Press Start 2P", cursive;
+  width: 90px;
+  height: 50px;
+}
+
+footer {
+  background-color: #643210;
+}
