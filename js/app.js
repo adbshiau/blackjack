@@ -23,9 +23,16 @@ const playerBtn = document.querySelector("#player-button");
 // ADD EVENT LISTENERS
 playerBtn.addEventListener("click", init);
 
-init();
+// init();
 
 // INITIAL CONTROLLER FUNCTION
+function init(e) {
+  // console.log("init function is working");
+
+  // Set initial value of state variables
+  const randomIndex = Math.floor(Math.random() * masterDeck.length);
+  console.log(randomIndex);
+}
 
 // MASTER DECK
 function buildMasterDeck() {
