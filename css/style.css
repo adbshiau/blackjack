@@ -9,7 +9,7 @@ body {
 main {
   background-color: #00741b;
   display: grid;
-  grid-template-rows: 1fr 30px 3fr 3fr 1fr 30px;
+  grid-template-rows: 1fr 30px 3fr 40px 3fr 1fr 30px;
   text-align: center;
   width: 500px;
 }
