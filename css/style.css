@@ -14,13 +14,13 @@ main {
   width: 500px;
 }
 
-#dealers-sum {
+#dealer-sum {
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.dealers-side {
+.dealer-side {
   background-color: #00741b;
   display: flex;
   flex-direction: row;
@@ -28,7 +28,7 @@ main {
   justify-content: space-evenly;
 }
 
-.players-side {
+.player-side {
   background-color: #00741b;
   display: flex;
   flex-direction: row;
@@ -43,7 +43,7 @@ main {
   align-items: center;
 }
 
-#players-sum {
+#player-sum {
   display: flex;
   align-items: center;
 }

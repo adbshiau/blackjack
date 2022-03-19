@@ -5,17 +5,24 @@ const suits = ['s', 'c', 'd', 'h'];
 const ranks = ['02', '03', '04', '05', '06', '07', '08', '09', '10', 'J', 'Q', 'K', 'A'];
 const masterDeck = buildMasterDeck();
 
-
-// Define state variables
+// DEFINE STATE VARIABLES
 let dealerSum;
 let playerSum;
 let playerButton;
 
-// Set the elements on the DOM that needs to be updated
+// DOM ELEMENTS TO BE UPDATED
+const dealerSumEl = document.querySelector("#dealer-sum");
+const dealerCard1El = document.querySelector("#dealer-card1");
+const dealerCard2El = document.querySelector("#dealer-card2");
+const messageEl = document.querySelector("#message");
+const playerSumEl = document.querySelector("#player-sum");
+const playerCard1El = document.querySelector("#player-card1");
+const playerCard2El = document.querySelector("#player-card2");
+const playerBtn = document.querySelector("#player-button"); 
 
-// Add event listeners
+// ADD EVENT LISTENERS
 
-// Initial controller function
+// INITIAL CONTROLLER FUNCTION
 
 // MASTER DECK
 function buildMasterDeck() {
