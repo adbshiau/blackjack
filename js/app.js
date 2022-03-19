@@ -7,6 +7,9 @@ const masterDeck = buildMasterDeck();
 
 
 // Define state variables
+let dealerSum;
+let playerSum;
+let playerButton;
 
 // Set the elements on the DOM that needs to be updated
 
