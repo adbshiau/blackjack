@@ -1,4 +1,4 @@
-console.log("JS file has loaded!");
+// console.log("JS file has loaded!");
 
 // DEFINE CONSTANTS
 const suits = ['s', 'c', 'd', 'h'];
@@ -14,6 +14,7 @@ let playerButton;
 const dealerSumEl = document.querySelector("#dealer-sum");
 const dealerCard1El = document.querySelector("#dealer-card1");
 const dealerCard2El = document.querySelector("#dealer-card2");
+// const dealerSideEl = document.querySelector(".dealer-side");
 const messageEl = document.querySelector("#message");
 const playerSumEl = document.querySelector("#player-sum");
 const playerCard1El = document.querySelector("#player-card1");
@@ -25,6 +26,8 @@ playerBtn.addEventListener("click", init);
 
 // init();
 
+// renderCardInContainer(masterDeck, dealerSideEl);
+
 // INITIAL CONTROLLER FUNCTION
 function init(e) {
   // console.log("init function is working");
@@ -32,6 +35,9 @@ function init(e) {
   // Set initial value of state variables
   const randomIndex = Math.floor(Math.random() * masterDeck.length);
   console.log(randomIndex);
+
+  
+
 }
 
 // MASTER DECK
@@ -49,4 +55,17 @@ function buildMasterDeck() {
     });
   });
   return deck;
+}
+
+// function renderCardInContainer(deck, container) {
+//   container.innerHTML = "";
+//   let cardsHtml = "";
+//   deck.forEach((card) => {
+//     cardsHtml += `<div class="card${card.face}"></div>`;
+//   });
+//   container.innerHTML = cardsHtml;
+// }
+
+function getSum(a,b) {
+  return a + b;
 }
