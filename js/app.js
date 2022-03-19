@@ -21,6 +21,9 @@ const playerCard2El = document.querySelector("#player-card2");
 const playerBtn = document.querySelector("#player-button"); 
 
 // ADD EVENT LISTENERS
+playerBtn.addEventListener("click", init);
+
+init();
 
 // INITIAL CONTROLLER FUNCTION
 
