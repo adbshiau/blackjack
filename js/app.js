@@ -19,14 +19,13 @@ const dealerCard2El = document.querySelector("#dealer-card2");
 const dealerSideEl = document.querySelector(".dealer-side");
 const messageEl = document.querySelector("#message");
 const playerSumEl = document.querySelector("#player-sum");
+const playerSideEl = document.querySelector(".player-side");
 const playerCard1El = document.querySelector("#player-card1");
 const playerCard2El = document.querySelector("#player-card2");
 const playerBtn = document.querySelector("#player-button"); 
 
 // ADD EVENT LISTENERS
 playerBtn.addEventListener("click", init);
-
-// renderCardInContainer(masterDeck, dealerSideEl);
 
 // MASTER DECK
 function buildMasterDeck() {
@@ -50,9 +49,10 @@ function init(e) {
   // console.log("init function is working");
 
   // Set initial value of state variables
+
+  // New discovery - SET object
   // dealerSet = new Set();
   // playerSet = new Set();
-
   // for (let i = 0; i < 2; i++) {
   //   dealerSet.add(Math.floor(Math.random() * masterDeck.length));
   // }
@@ -62,42 +62,35 @@ function init(e) {
   
   let dealerCard1 = dealerArr.push(masterDeck[(Math.floor(Math.random() * masterDeck.length))]);
   let dealerCard2 = dealerArr.push(masterDeck[(Math.floor(Math.random() * masterDeck.length - 1))]);
-
-  function renderDealerDeck(dealerDeck, container) {
-    container.innerHTML = '';
-    let card1HTML = '';
-    let card2HTML = '';
-
-    card1HTML += `<div class="card ${dealerDeck[0].face}"></div>`;
-    card2HTML += `<div class="card ${dealerDeck[1].face}"></div>`;
-    console.group(dealerDeck, "dealerDeck");
-    // dealerDeck.forEach(function(card) {
-    //   cardsHTML += `<div class="card ${card.face}">card</div>`;
-    //   console.log(cardsHTML, "cardsHTML");
-    //   console.log(card.face, "card.face");
-    // })
-    // dealerSideEl.append(card1HTML, card2HTML);
-
-    container.innerHTML = card1HTML;
-    container.innerHTML += card2HTML;
-    console.log(container.innerHTML, "container");
+ 
+  let playerCard1 = playerArr.push(masterDeck[(Math.floor(Math.random() * masterDeck.length))]);
+  let playerCard2 = playerArr.push(masterDeck[(Math.floor(Math.random() * masterDeck.length - 1))]);
+ 
+  
     
-    console.log(dealerSideEl, "dealerSideEl");
-  }
 
-  renderDealerDeck(dealerArr, dealerSideEl);
-  // if (dealerCard1 !== dealerCard2) {
-  //   dealerArr.push(dealerCard1, dealerCard2);
-  // } else {
+  renderDeck(dealerArr, dealerSideEl);
 
-  // }
-
-  // console.log(dealerSet);
-  // const randomIndex = Math.floor(Math.random() * masterDeck.length);
-
-  // render();
+  renderDeck(playerArr, playerSideEl);
+  
 }
 
+function renderDeck(deck, container) {
+  container.innerHTML = '';
+  let card1HTML = '';
+  let card2HTML = '';
+
+  card1HTML += `<div class="card ${deck[0].face}"></div>`;
+  card2HTML += `<div class="card ${deck[1].face}"></div>`;
+  
+  // deck.forEach(function(card) {
+  //   cardsHTML += `<div class="card ${card.face}">card</div>`;
+  // })
+  // dealerSideEl.append(card1HTML, card2HTML);
+
+  container.innerHTML = card1HTML;
+  container.innerHTML += card2HTML;
+}
 // RENDER
 // function render() {
 //   dealerSideEl.innerHTML = "";
@@ -116,7 +109,7 @@ function init(e) {
 //   container.innerHTML = cardsHtml;
 // }
 
-// Update the sum given the index of  
+// Update the sum
 function updateSum(arr) {
   let sum = 0;
 
