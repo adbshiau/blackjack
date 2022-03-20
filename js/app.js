@@ -9,12 +9,14 @@ const masterDeck = buildMasterDeck();
 let dealerSum;
 let playerSum;
 let playerButton;
+let dealerArr;
+let playerArr;
 
 // DOM ELEMENTS TO BE UPDATED
 const dealerSumEl = document.querySelector("#dealer-sum");
 const dealerCard1El = document.querySelector("#dealer-card1");
 const dealerCard2El = document.querySelector("#dealer-card2");
-// const dealerSideEl = document.querySelector(".dealer-side");
+const dealerSideEl = document.querySelector(".dealer-side");
 const messageEl = document.querySelector("#message");
 const playerSumEl = document.querySelector("#player-sum");
 const playerCard1El = document.querySelector("#player-card1");
@@ -24,21 +26,7 @@ const playerBtn = document.querySelector("#player-button");
 // ADD EVENT LISTENERS
 playerBtn.addEventListener("click", init);
 
-// init();
-
 // renderCardInContainer(masterDeck, dealerSideEl);
-
-// INITIAL CONTROLLER FUNCTION
-function init(e) {
-  // console.log("init function is working");
-
-  // Set initial value of state variables
-  const randomIndex = Math.floor(Math.random() * masterDeck.length);
-  console.log(randomIndex);
-
-  
-
-}
 
 // MASTER DECK
 function buildMasterDeck() {
@@ -57,6 +45,68 @@ function buildMasterDeck() {
   return deck;
 }
 
+// INITIAL CONTROLLER FUNCTION
+function init(e) {
+  // console.log("init function is working");
+
+  // Set initial value of state variables
+  // dealerSet = new Set();
+  // playerSet = new Set();
+
+  // for (let i = 0; i < 2; i++) {
+  //   dealerSet.add(Math.floor(Math.random() * masterDeck.length));
+  // }
+
+  dealerArr = [];
+  playerArr = [];
+  
+  let dealerCard1 = dealerArr.push(masterDeck[(Math.floor(Math.random() * masterDeck.length))]);
+  let dealerCard2 = dealerArr.push(masterDeck[(Math.floor(Math.random() * masterDeck.length - 1))]);
+
+  function renderDealerDeck(dealerDeck, container) {
+    container.innerHTML = '';
+    let card1HTML = '';
+    let card2HTML = '';
+
+    card1HTML += `<div class="card ${dealerDeck[0].face}"></div>`;
+    card2HTML += `<div class="card ${dealerDeck[1].face}"></div>`;
+    console.group(dealerDeck, "dealerDeck");
+    // dealerDeck.forEach(function(card) {
+    //   cardsHTML += `<div class="card ${card.face}">card</div>`;
+    //   console.log(cardsHTML, "cardsHTML");
+    //   console.log(card.face, "card.face");
+    // })
+    // dealerSideEl.append(card1HTML, card2HTML);
+
+    container.innerHTML = card1HTML;
+    container.innerHTML += card2HTML;
+    console.log(container.innerHTML, "container");
+    
+    console.log(dealerSideEl, "dealerSideEl");
+  }
+
+  renderDealerDeck(dealerArr, dealerSideEl);
+  // if (dealerCard1 !== dealerCard2) {
+  //   dealerArr.push(dealerCard1, dealerCard2);
+  // } else {
+
+  // }
+
+  // console.log(dealerSet);
+  // const randomIndex = Math.floor(Math.random() * masterDeck.length);
+
+  // render();
+}
+
+// RENDER
+// function render() {
+//   dealerSideEl.innerHTML = "";
+//   let cardsHTML = "";
+//   for (let index of dealerArr) {
+//     console.log(index);
+//   }
+// }
+
 // function renderCardInContainer(deck, container) {
 //   container.innerHTML = "";
 //   let cardsHtml = "";
@@ -66,6 +116,10 @@ function buildMasterDeck() {
 //   container.innerHTML = cardsHtml;
 // }
 
-function getSum(a,b) {
-  return a + b;
+// Update the sum given the index of  
+function updateSum(arr) {
+  let sum = 0;
+
+
 }
+
