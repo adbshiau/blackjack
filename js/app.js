@@ -18,6 +18,7 @@ const ranks = [
   "A",
 ];
 const masterDeck = buildMasterDeck();
+const shuffledDeck = getNewShuffledDeck();
 
 // DEFINE STATE VARIABLES
 let dealerSum;
@@ -28,14 +29,14 @@ let playerArr;
 
 // DOM ELEMENTS TO BE UPDATED
 const dealerSumEl = document.querySelector("#dealer-sum");
-const dealerCard1El = document.querySelector("#dealer-card1");
-const dealerCard2El = document.querySelector("#dealer-card2");
+// const dealerCard1El = document.querySelector("#dealer-card1");
+// const dealerCard2El = document.querySelector("#dealer-card2");
 const dealerSideEl = document.querySelector(".dealer-side");
 const messageEl = document.querySelector("#message");
 const playerSumEl = document.querySelector("#player-sum");
 const playerSideEl = document.querySelector(".player-side");
-const playerCard1El = document.querySelector("#player-card1");
-const playerCard2El = document.querySelector("#player-card2");
+// const playerCard1El = document.querySelector("#player-card1");
+// const playerCard2El = document.querySelector("#player-card2");
 const playerBtn = document.querySelector("#player-button");
 
 // ADD EVENT LISTENERS
@@ -56,6 +57,20 @@ function buildMasterDeck() {
     });
   });
   return deck;
+}
+
+// SHUFFLED DECK
+function getNewShuffledDeck() {
+  // Create a copy of the masterDeck (leave masterDeck untouched!)
+  const tempDeck = [...masterDeck];
+  const newShuffledDeck = [];
+  while (tempDeck.length) {
+    // Get a random index for a card still in the tempDeck
+    const rndIdx = Math.floor(Math.random() * tempDeck.length);
+    // Note the [0] after splice - this is because splice always returns an array and we just want the card object in that array
+    newShuffledDeck.push(tempDeck.splice(rndIdx, 1)[0]);
+  }
+  return newShuffledDeck;
 }
 
 // RENDER CARDS
@@ -93,34 +108,59 @@ function init(e) {
   playerArr = [];
   playerSum = 0;
 
-  let dealerCard1 = dealerArr.push(
-    masterDeck[Math.floor(Math.random() * masterDeck.length)]
-  );
-  let dealerCard2 = dealerArr.push(
-    masterDeck[Math.floor(Math.random() * masterDeck.length - 1)]
-  );
+  // let dealerCard1 = dealerArr.push(
+  //   masterDeck[Math.floor(Math.random() * masterDeck.length)]
+  // );
+  // let dealerCard2 = dealerArr.push(
+  //   masterDeck[Math.floor(Math.random() * masterDeck.length - 1)]
+  // );
 
-  let playerCard1 = playerArr.push(
-    masterDeck[Math.floor(Math.random() * masterDeck.length)]
-  );
-  let playerCard2 = playerArr.push(
-    masterDeck[Math.floor(Math.random() * masterDeck.length - 1)]
-  );
+  // let playerCard1 = playerArr.push(
+  //   masterDeck[Math.floor(Math.random() * masterDeck.length)]
+  // );
+  // let playerCard2 = playerArr.push(
+  //   masterDeck[Math.floor(Math.random() * masterDeck.length - 1)]
+  // );
 
-  renderDeck(dealerArr, dealerSideEl);
-  renderDeck(playerArr, playerSideEl);
+  for (let i = 0; i < 4; i++) {
+    dealerArr.push(shuffledDeck[i]);
+    i++;
+    playerArr.push(shuffledDeck[i]);
+  }
+
+  // renderDeck(dealerArr, dealerSideEl);
+  // renderDeck(playerArr, playerSideEl);
 
   dealerSum = updateSum(dealerArr);
   playerSum = updateSum(playerArr);
 
-  
+  // renderSum(dealerSum, dealerSumEl);
+  // renderSum(playerSum, playerSumEl);
+
+  render();
+}
+
+function render () {
+  renderDeck(dealerArr, dealerSideEl);
+  renderDeck(playerArr, playerSideEl);
+
+  renderSum(dealerSum, dealerSumEl);
+  renderSum(playerSum, playerSumEl);
 }
 
 // Update the sum
-function updateSum(arr, container) {
+function updateSum(arr) {
   let sum = 0;
   for (let i = 0; i < arr.length; i++) {
     sum += arr[i].value;
   }
   return sum;
 }
+
+// Render sum
+function renderSum(sum, container) {
+  return container.innerText = sum;
+}
+
+// 
+
