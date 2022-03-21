@@ -47,7 +47,7 @@ main {
   justify-content: space-evenly;
 }
 
-.stand-area {
+.play-area {
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
@@ -61,7 +61,18 @@ main {
 
 #player-button {
   background-color: #0088ff;
+  color: white;
+  padding: 1vmin;
+  border-radius: 2vmin;
+  cursor: pointer;
+  border: 0.3vmin solid white;
+  font-family: "Press Start 2P", cursive;
+  width: 90px;
+  height: 50px;
+}
 
+#hit-button {
+  background-color: #0088ff;
   color: white;
   padding: 1vmin;
   border-radius: 2vmin;
