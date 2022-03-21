@@ -80,7 +80,8 @@ function renderDeck(deck, container) {
   let card2HTML = '';
 
   card1HTML += `<div class="card ${deck[0].face}"></div>`;
-  card2HTML += `<div class="card ${deck[1].face}"></div>`;
+  // card2HTML += `<div class="card ${deck[1].face}"></div>`;
+  card2HTML += `<img id="face-down" src="css/card-deck-css/images/backs/red.svg" alt="face down card"></img>`;
 
   // deck.forEach(function(card) {
   //   cardsHTML += `<div class="card ${card.face}">card</div>`;
