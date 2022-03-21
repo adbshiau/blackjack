@@ -106,8 +106,7 @@ function renderPlayerDeck(deck, container) {
   card1HTML += `<div class="card ${deck[0].face}"></div>`;
   card2HTML += `<div class="card ${deck[1].face}"></div>`;
 
-  container.innerHTML = card1HTML;
-  container.innerHTML += card2HTML;
+  container.innerHTML = card1HTML + card2HTML;
 }
 
 function addPlayerCard () {

@@ -9,7 +9,7 @@ body {
 main {
   background-color: #00741b;
   display: grid;
-  grid-template-rows: 1fr 30px 3fr 40px 3fr 1fr 30px;
+  grid-template-rows: 1fr 30px 2fr 40px 2fr 30px 60px 30px;
   text-align: center;
   width: 500px;
 }
@@ -57,6 +57,8 @@ main {
 #player-sum {
   display: flex;
   align-items: center;
+  flex-direction: row;
+  justify-content: center;
 }
 
 #player-button {
