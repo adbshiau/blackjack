@@ -49,7 +49,7 @@ playBtn.addEventListener("click", init);
 // hitBtn.addEventListener("click", addPlayerCard)
 playAreaEl.addEventListener("click", function(e) {
   if (e.target.matches("#stand-button")) {
-    revealDealerCards();
+    revealDealerCards(dealerArr, dealerSideEl);
   } else if (e.target.matches("#hit-button")) {
     addPlayerCard();
   }
@@ -91,7 +91,7 @@ function getNewShuffledDeck() {
 }
 
 // RENDER CARDS
-function renderDealerDeck(deck, container) {
+function renderOneCardFaceDown(deck, container) {
   container.innerHTML = '';
   let card1HTML = '';
   let card2HTML = '';
@@ -108,7 +108,7 @@ function renderDealerDeck(deck, container) {
   container.innerHTML = card1HTML +card2HTML;
 }
 
-function renderPlayerDeck(deck, container) {
+function renderBothCards(deck, container) {
   container.innerHTML = '';
   let card1HTML = '';
   let card2HTML = '';
@@ -173,8 +173,8 @@ function init(e) {
 
 function render () {
 
-  renderDealerDeck(dealerArr, dealerSideEl);
-  renderPlayerDeck(playerArr, playerSideEl);
+  renderOneCardFaceDown(dealerArr, dealerSideEl);
+  renderBothCards(playerArr, playerSideEl);
 
   renderSum(dealerSum, dealerSumEl);
   renderSum(playerSum, playerSumEl);
@@ -195,9 +195,11 @@ function renderHitStandButton (container) {
 
 
 
-function revealDealerCards() {
+function revealDealerCards(arr, container) {
   // console.log("it works!");
-
+  renderBothCards(arr, container);
+  dealerSum = updateSum(dealerArr);
+  renderSum(dealerSum,dealerSumEl);
 }
 
 // Update the sum
