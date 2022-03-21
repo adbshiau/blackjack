@@ -28,13 +28,16 @@ main {
   justify-content: space-evenly;
 }
 
-
 #face-down {
   width: 6em;
   height: 8.25em;
   background-color: white;
   border-radius: 5px;
 }
+
+/* h3 {
+  align-items: center;
+} */
 
 .player-side {
   background-color: #00741b;

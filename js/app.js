@@ -42,6 +42,7 @@ const playerBtn = document.querySelector("#player-button");
 // ADD EVENT LISTENERS
 playerBtn.addEventListener("click", init);
 
+
 // MASTER DECK
 function buildMasterDeck() {
   const deck = [];
@@ -141,14 +142,8 @@ function init(e) {
     playerArr.push(shuffledDeck[i]);
   }
 
-  // renderDeck(dealerArr, dealerSideEl);
-  // renderDeck(playerArr, playerSideEl);
-
   dealerSum = updateSum(dealerArr);
   playerSum = updateSum(playerArr);
-
-  // renderSum(dealerSum, dealerSumEl);
-  // renderSum(playerSum, playerSumEl);
 
   render();
 }
@@ -156,11 +151,9 @@ function init(e) {
 function render () {
   renderDealerDeck(dealerArr, dealerSideEl);
   renderPlayerDeck(playerArr, playerSideEl);
-  renderSum(dealerSum, dealerSumEl);
-  renderSum(playerSum, playerSumEl);
 
-  
-  // renderDeck(playerArr, playerSideEl);
+  // renderSum(dealerSum, dealerSumEl);
+  renderSum(playerSum, playerSumEl);
 }
 
 // Update the sum
