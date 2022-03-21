@@ -27,6 +27,7 @@ let playerSum;
 // let hitButton;
 let dealerArr;
 let playerArr;
+let cardsArr;
 
 // DOM ELEMENTS TO BE UPDATED
 const dealerSumEl = document.querySelector("#dealer-sum");
@@ -51,7 +52,7 @@ playAreaEl.addEventListener("click", function(e) {
   if (e.target.matches("#stand-button")) {
     revealDealerCards(dealerArr, dealerSideEl);
   } else if (e.target.matches("#hit-button")) {
-    addPlayerCard();
+    addCard(playerArr, playerSideEl);
   }
 });
 
@@ -116,13 +117,22 @@ function renderBothCards(deck, container) {
   card1HTML += `<div class="card ${deck[0].face}"></div>`;
   card2HTML += `<div class="card ${deck[1].face}"></div>`;
 
-  container.innerHTML = card1HTML + card2HTML;
+  return container.innerHTML = card1HTML + card2HTML;
 }
 
-function addPlayerCard () {
-  console.log("addPlayerCard function works!");
+// function addCard (arr, container) {
+//   // console.log("addPlayerCard function works!");
+//   arr.push(shuffledDeck[cardsArr.length]);
+
+//   container.innerHTML = '';
+//   let cardHTML = '';
+
+//   cardHTML += `<div class="card ${arr[cardsArr.length].face}"></div>`;
   
-}
+
+//   container.innerHTML = renderBothCards(playerArr, playerSideEl) + cardHTML;
+  
+// }
 
 // INITIAL CONTROLLER FUNCTION
 function init(e) {
@@ -140,6 +150,7 @@ function init(e) {
   dealerSum = 0;
   playerArr = [];
   playerSum = 0;
+  cardsArr = [];
  
   // let dealerCard1 = dealerArr.push(
   //   masterDeck[Math.floor(Math.random() * masterDeck.length)]
@@ -161,6 +172,8 @@ function init(e) {
     playerArr.push(shuffledDeck[i]);
   }
 
+  cardsArr = cardsArr.concat(playerArr, dealerArr);
+
   // dealerSum = updateSum(dealerArr);
   dealerSum = dealerArr[0].value;
   playerSum = updateSum(playerArr);
@@ -175,6 +188,7 @@ function render () {
 
   renderOneCardFaceDown(dealerArr, dealerSideEl);
   renderBothCards(playerArr, playerSideEl);
+  
 
   renderSum(dealerSum, dealerSumEl);
   renderSum(playerSum, playerSumEl);
@@ -193,13 +207,11 @@ function renderHitStandButton (container) {
   container.innerHTML = hitButton + standButton;
 }
 
-
-
 function revealDealerCards(arr, container) {
   // console.log("it works!");
   renderBothCards(arr, container);
   dealerSum = updateSum(dealerArr);
-  renderSum(dealerSum,dealerSumEl);
+  renderSum(dealerSum, dealerSumEl);
 }
 
 // Update the sum
