@@ -28,6 +28,14 @@ main {
   justify-content: space-evenly;
 }
 
+
+#face-down {
+  width: 6em;
+  height: 8.25em;
+  background-color: white;
+  border-radius: 5px;
+}
+
 .player-side {
   background-color: #00741b;
   display: flex;
@@ -64,3 +72,5 @@ main {
 footer {
   background-color: #643210;
 }
+
+

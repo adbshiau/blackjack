@@ -74,19 +74,31 @@ function getNewShuffledDeck() {
 }
 
 // RENDER CARDS
-function renderDeck(deck, container) {
+function renderDealerDeck(deck, container) {
   container.innerHTML = '';
   let card1HTML = '';
   let card2HTML = '';
 
   card1HTML += `<div class="card ${deck[0].face}"></div>`;
-  // card2HTML += `<div class="card ${deck[1].face}"></div>`;
   card2HTML += `<img id="face-down" src="css/card-deck-css/images/backs/red.svg" alt="face down card"></img>`;
+  // card2HTML += `<div class="card ${deck[1].face}"></div>`;
 
   // deck.forEach(function(card) {
   //   cardsHTML += `<div class="card ${card.face}">card</div>`;
   // })
   // dealerSideEl.append(card1HTML, card2HTML);
+
+  container.innerHTML = card1HTML;
+  container.innerHTML += card2HTML;
+}
+
+function renderPlayerDeck(deck, container) {
+  container.innerHTML = '';
+  let card1HTML = '';
+  let card2HTML = '';
+
+  card1HTML += `<div class="card ${deck[0].face}"></div>`;
+  card2HTML += `<div class="card ${deck[1].face}"></div>`;
 
   container.innerHTML = card1HTML;
   container.innerHTML += card2HTML;
@@ -142,11 +154,13 @@ function init(e) {
 }
 
 function render () {
-  renderDeck(dealerArr, dealerSideEl);
-  renderDeck(playerArr, playerSideEl);
-
+  renderDealerDeck(dealerArr, dealerSideEl);
+  renderPlayerDeck(playerArr, playerSideEl);
   renderSum(dealerSum, dealerSumEl);
   renderSum(playerSum, playerSumEl);
+
+  
+  // renderDeck(playerArr, playerSideEl);
 }
 
 // Update the sum
