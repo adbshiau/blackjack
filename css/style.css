@@ -61,7 +61,7 @@ main {
   justify-content: center;
 }
 
-#player-button {
+#play-button {
   background-color: #0088ff;
   color: white;
   padding: 1vmin;
@@ -70,7 +70,7 @@ main {
   border: 0.3vmin solid white;
   font-family: "Press Start 2P", cursive;
   width: 90px;
-  height: 50px;
+  height: 40px;
 }
 
 #hit-button {
@@ -82,7 +82,7 @@ main {
   border: 0.3vmin solid white;
   font-family: "Press Start 2P", cursive;
   width: 90px;
-  height: 50px;
+  height: 40px;
 }
 
 #stand-button {
@@ -94,7 +94,7 @@ main {
   border: 0.3vmin solid white;
   font-family: "Press Start 2P", cursive;
   width: 90px;
-  height: 50px;
+  height: 40px;
 }
 
 footer {
