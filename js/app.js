@@ -24,6 +24,7 @@ const shuffledDeck = getNewShuffledDeck();
 let dealerSum;
 let playerSum;
 let playerButton;
+let hitButton;
 let dealerArr;
 let playerArr;
 
@@ -37,10 +38,14 @@ const playerSumEl = document.querySelector("#player-sum");
 const playerSideEl = document.querySelector(".player-side");
 // const playerCard1El = document.querySelector("#player-card1");
 // const playerCard2El = document.querySelector("#player-card2");
+const playAreaEl = document.querySelector(".play-area");
 const playerBtn = document.querySelector("#player-button");
+const hitBtn = document.querySelector("#hit-button");
 
 // ADD EVENT LISTENERS
 playerBtn.addEventListener("click", init);
+hitBtn.addEventListener("click", addPlayerCard)
+
 
 
 // MASTER DECK
@@ -105,6 +110,11 @@ function renderPlayerDeck(deck, container) {
   container.innerHTML += card2HTML;
 }
 
+function addPlayerCard () {
+  
+  
+}
+
 // INITIAL CONTROLLER FUNCTION
 function init(e) {
   // console.log("init function is working");
@@ -121,7 +131,7 @@ function init(e) {
   dealerSum = 0;
   playerArr = [];
   playerSum = 0;
-
+ 
   // let dealerCard1 = dealerArr.push(
   //   masterDeck[Math.floor(Math.random() * masterDeck.length)]
   // );
@@ -149,11 +159,24 @@ function init(e) {
 }
 
 function render () {
+
   renderDealerDeck(dealerArr, dealerSideEl);
   renderPlayerDeck(playerArr, playerSideEl);
 
   // renderSum(dealerSum, dealerSumEl);
   renderSum(playerSum, playerSumEl);
+
+  renderHitStandButton(playAreaEl);
+}
+
+function renderHitStandButton (container) {
+  container.innerHTML = '';
+  let hitButton = '';
+  let standButton = '';
+
+  hitButton += `<button id="hit-button">HIT</button>`;
+  standButton += `<button id="stand-button">STAND</button>`;
+  container.innerHTML = hitButton + standButton;
 }
 
 // Update the sum
