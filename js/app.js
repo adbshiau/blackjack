@@ -16,7 +16,7 @@ const ranks = [
   "A",
 ];
 const masterDeck = buildMasterDeck();
-const shuffledDeck = getNewShuffledDeck();
+let shuffledDeck = getNewShuffledDeck();
 
 // DEFINE STATE VARIABLES
 let dealerSum;
@@ -149,6 +149,9 @@ function init(e) {
   playerSum = updateSum(playerArr);
 
   render();
+  if (playerSum > 21) {
+    renderMessage();
+  }
 }
 
 // RENDER INITIAL CARDS, SUM, AND HIT & STAND BUTTON
@@ -197,16 +200,18 @@ function renderSum(sum, container) {
 
 // RENDER WIN/LOSE MESSAGE
 function renderMessage(container) {
-  if (playerSum > 21) {
+  if (playerSum > 21 && dealerSum <= 21) {
     container.innerText = "Bust! Dealer won!";
   } else if (playerSum < dealerSum && dealerSum <= 21) {
     container.innerText = "Dealer won!";
-  } else if (playerSum > dealerSum) {
+  } else if (playerSum > dealerSum && playerSum <= 21) {
     container.innerText = "You beat the dealer!";
   } else if (playerSum === dealerSum) {
     container.innerText = "Draw!";
   } else if (playerSum < dealerSum && dealerSum > 21) {
     container.innerText = " Dealer bust. You won!";
+  } else if (playerSum > 21 && dealerSum > 21) {
+    container.innerText = "BUST!"
   }
 }
 
@@ -250,11 +255,13 @@ function hit() {
   }
 }
 
-
 // RESETS THE GAME
-// function resetGame() {
-//   // Reset global variables
-//   // Remove event listeners
-//   // Calls main game function
-//   // init();
-// }
+function resetGame() {
+  // Reset global variables
+  shuffledDeck = getNewShuffledDeck();
+  init();
+  
+  // Remove event listeners
+  // Calls main game function
+  // init();
+}
