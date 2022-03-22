@@ -109,30 +109,36 @@ function renderOneCardFaceDown(deck, container) {
   container.innerHTML = card1HTML +card2HTML;
 }
 
-function renderBothCards(deck, container) {
+function renderBothCards(hands, container) {
   container.innerHTML = '';
-  let card1HTML = '';
-  let card2HTML = '';
+  // let card1HTML = '';
+  // let card2HTML = '';
+  
+  // card1HTML += `<div class="card ${hands[0].face}"></div>`;
+  // card2HTML += `<div class="card ${hands[1].face}"></div>`;
 
-  card1HTML += `<div class="card ${deck[0].face}"></div>`;
-  card2HTML += `<div class="card ${deck[1].face}"></div>`;
+  hands.forEach((hand) => {
+    container.innerHTML += `<div class="card ${hand.face}"></div>`;
+  })
+  
+  return container.innerHTML;
 
-  return container.innerHTML = card1HTML + card2HTML;
+  // return container.innerHTML = card1HTML + card2HTML;
 }
 
-// function addCard (arr, container) {
-//   // console.log("addPlayerCard function works!");
-//   arr.push(shuffledDeck[cardsArr.length]);
-
-//   container.innerHTML = '';
-//   let cardHTML = '';
-
-//   cardHTML += `<div class="card ${arr[cardsArr.length].face}"></div>`;
+function addCard (arr, container) {
+  
+  arr.push(shuffledDeck[cardsArr.length]);
+  console.log(playerArr);
+  container.innerHTML = '';
+  let cardHTML = '';
+  
+  cardHTML += `<div class="card ${arr[cardsArr.length-2].face}"></div>`;
   
 
-//   container.innerHTML = renderBothCards(playerArr, playerSideEl) + cardHTML;
-  
-// }
+  container.innerHTML = renderBothCards(playerArr, playerSideEl);
+  cardsArr = playerArr.concat(dealerArr);
+}
 
 // INITIAL CONTROLLER FUNCTION
 function init(e) {

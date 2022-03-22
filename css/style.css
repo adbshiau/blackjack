@@ -11,7 +11,7 @@ main {
   display: grid;
   grid-template-rows: 1fr 30px 2fr 40px 2fr 30px 60px 30px;
   text-align: center;
-  width: 500px;
+  width: 700px;
 }
 
 #dealer-sum {
