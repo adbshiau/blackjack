@@ -44,6 +44,7 @@ playAreaEl.addEventListener("click", function(e) {
   if (e.target.matches("#stand-button")) {
     revealDealerCards(dealerArr, dealerSideEl);
     renderMessage(messageEl);
+    newGame(playAreaEl);
   } else if (e.target.matches("#hit-button")) {
     addCard(playerArr, playerSideEl);
     if (playerSum < 21) {
@@ -52,9 +53,12 @@ playAreaEl.addEventListener("click", function(e) {
       renderSum((updateSum(playerArr)), playerSumEl);
       revealDealerCards(dealerArr, dealerSideEl);
       renderMessage(messageEl);
+      newGame(playAreaEl);
     } else if (playerSum === 21) {
       renderSum((updateSum(playerArr)), playerSumEl);
+      revealDealerCards(dealerArr, dealerSideEl);
       renderMessage(messageEl);
+      newGame(playAreaEl);
     }
   }
 });
@@ -140,7 +144,7 @@ function init(e) {
   playerArr = [];
   playerSum = 0;
   cardsArr = [];
-
+  message = "";
   for (let i = 0; i < 4; i++) {
     dealerArr.push(shuffledDeck[i]);
     i++;
@@ -164,7 +168,7 @@ function render () {
   renderSum(playerSum, playerSumEl);
 
   renderHitStandButton(playAreaEl);
-  // renderMessage(messageEl);
+  messageEl.innerText = message;
 }
 
 // RENDER HIT AND STAND BUTTON AFTER CLICKING PLAY
@@ -214,3 +218,12 @@ function renderMessage(container) {
   }
 }
 
+function newGame(container) {
+  container.innerHTML = '';
+  let newGameButton = '';
+
+  newGameButton += `<button id="new-game-button">NEW GAME</button>`;
+  container.innerHTML = newGameButton;
+
+
+}

@@ -35,10 +35,6 @@ main {
   border-radius: 5px;
 }
 
-/* h3 {
-  align-items: center;
-} */
-
 .player-side {
   background-color: #00741b;
   display: flex;
@@ -96,6 +92,17 @@ main {
   width: 90px;
   height: 40px;
 }
+
+#new-game-button {
+  background-color: #0088ff;
+  color: white;
+  padding: 1vmin;
+  border-radius: 2vmin;
+  cursor: pointer;
+  border: 0.3vmin solid white;
+  font-family: "Press Start 2P", cursive;
+  width: 100px;
+  height: 50px;
 
 footer {
   background-color: #643210;
