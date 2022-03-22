@@ -53,12 +53,9 @@ playAreaEl.addEventListener("click", function(e) {
     revealDealerCards(dealerArr, dealerSideEl);
   } else if (e.target.matches("#hit-button")) {
     addCard(playerArr, playerSideEl);
+    renderSum((updateSum(playerArr)), playerSumEl);
   }
 });
-
-// document.on("click", "#hit-button", addPlayerCard);
-
-
 
 // MASTER DECK
 function buildMasterDeck() {
@@ -91,7 +88,7 @@ function getNewShuffledDeck() {
   return newShuffledDeck;
 }
 
-// RENDER CARDS
+// RENDER DEALERS CARDS AT THE BEGINNING OF THE GAME
 function renderOneCardFaceDown(deck, container) {
   container.innerHTML = '';
   let card1HTML = '';
@@ -99,23 +96,12 @@ function renderOneCardFaceDown(deck, container) {
 
   card1HTML += `<div class="card ${deck[0].face}"></div>`;
   card2HTML += `<img id="face-down" src="css/card-deck-css/images/backs/red.svg" alt="face down card"></img>`;
-  // card2HTML += `<div class="card ${deck[1].face}"></div>`;
-
-  // deck.forEach(function(card) {
-  //   cardsHTML += `<div class="card ${card.face}">card</div>`;
-  // })
-  // dealerSideEl.append(card1HTML, card2HTML);
-
+  
   container.innerHTML = card1HTML +card2HTML;
 }
 
-function renderBothCards(hands, container) {
+function renderCards(hands, container) {
   container.innerHTML = '';
-  // let card1HTML = '';
-  // let card2HTML = '';
-  
-  // card1HTML += `<div class="card ${hands[0].face}"></div>`;
-  // card2HTML += `<div class="card ${hands[1].face}"></div>`;
 
   hands.forEach((hand) => {
     container.innerHTML += `<div class="card ${hand.face}"></div>`;
@@ -136,13 +122,13 @@ function addCard (arr, container) {
   cardHTML += `<div class="card ${arr[cardsArr.length-2].face}"></div>`;
   
 
-  container.innerHTML = renderBothCards(playerArr, playerSideEl);
+  container.innerHTML = renderCards(playerArr, playerSideEl);
   cardsArr = playerArr.concat(dealerArr);
+  playerSum = updateSum(playerArr);
 }
 
 // INITIAL CONTROLLER FUNCTION
 function init(e) {
-  // console.log("init function is working");
 
   // New discovery - SET object
   // dealerSet = new Set();
@@ -157,20 +143,6 @@ function init(e) {
   playerArr = [];
   playerSum = 0;
   cardsArr = [];
- 
-  // let dealerCard1 = dealerArr.push(
-  //   masterDeck[Math.floor(Math.random() * masterDeck.length)]
-  // );
-  // let dealerCard2 = dealerArr.push(
-  //   masterDeck[Math.floor(Math.random() * masterDeck.length - 1)]
-  // );
-
-  // let playerCard1 = playerArr.push(
-  //   masterDeck[Math.floor(Math.random() * masterDeck.length)]
-  // );
-  // let playerCard2 = playerArr.push(
-  //   masterDeck[Math.floor(Math.random() * masterDeck.length - 1)]
-  // );
 
   for (let i = 0; i < 4; i++) {
     dealerArr.push(shuffledDeck[i]);
@@ -180,11 +152,8 @@ function init(e) {
 
   cardsArr = cardsArr.concat(playerArr, dealerArr);
 
-  // dealerSum = updateSum(dealerArr);
   dealerSum = dealerArr[0].value;
   playerSum = updateSum(playerArr);
-
-   
 
   render();
 }
@@ -193,11 +162,10 @@ function init(e) {
 function render () {
 
   renderOneCardFaceDown(dealerArr, dealerSideEl);
-  renderBothCards(playerArr, playerSideEl);
+  renderCards(playerArr, playerSideEl);
   
-
   renderSum(dealerSum, dealerSumEl);
-  renderSum(playerSum, playerSumEl);
+  // renderSum(playerSum, playerSumEl);
 
   renderHitStandButton(playAreaEl);
   // renderMessage(messageEl);
