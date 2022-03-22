@@ -1,4 +1,3 @@
-// console.log("JS file has loaded!");
 
 // DEFINE CONSTANTS
 const suits = ["s", "c", "d", "h"];
@@ -43,24 +42,10 @@ playBtn.addEventListener("click", init);
 playAreaEl.addEventListener("click", function (e) {
   if (e.target.matches("#stand-button")) {
     stand();
-    // revealDealerCards(dealerArr, dealerSideEl);
-    // renderMessage(messageEl);
-    // newGameButton(playAreaEl);
   } else if (e.target.matches("#hit-button")) {
-    addCard(playerArr, playerSideEl);
-    if (playerSum < 21) {
-      renderSum(updateSum(playerArr), playerSumEl);
-    } else if (playerSum > 21) {
-      renderSum(updateSum(playerArr), playerSumEl);
-      revealDealerCards(dealerArr, dealerSideEl);
-      renderMessage(messageEl);
-      newGameButton(playAreaEl);
-    } else if (playerSum === 21) {
-      renderSum(updateSum(playerArr), playerSumEl);
-      revealDealerCards(dealerArr, dealerSideEl);
-      renderMessage(messageEl);
-      newGameButton(playAreaEl);
-    }
+    hit();
+  } else if (e.target.matches("#new-game-button")) {
+    resetGame();
   }
 });
 
@@ -212,6 +197,8 @@ function renderMessage(container) {
     container.innerText = "You won!";
   } else if (playerSum === dealerSum) {
     container.innerText = "Draw!";
+  } else if (playerSum < dealerSum && dealerSum > 21) {
+    container.innerText = "You won!";
   }
 }
 
@@ -222,11 +209,6 @@ function newGameButton(container) {
 
   newGameButton += `<button id="new-game-button">NEW GAME</button>`;
   container.innerHTML = newGameButton;
-
-  // Reset global variables
-  // Remove event listeners
-  // Calls main game function
-  // init();
 }
 
 function addDealerCard(arr, container) {
@@ -245,7 +227,33 @@ function addDealerCard(arr, container) {
 }
 
 function stand() {
+  addDealerCard(dealerArr, dealerSideEl);
   revealDealerCards(dealerArr, dealerSideEl);
   renderMessage(messageEl);
   newGameButton(playAreaEl);
+}
+
+function hit() {
+  addCard(playerArr, playerSideEl);
+  if (playerSum < 21) {
+    renderSum(updateSum(playerArr), playerSumEl);
+  } else if (playerSum > 21) {
+    renderSum(updateSum(playerArr), playerSumEl);
+    revealDealerCards(dealerArr, dealerSideEl);
+    renderMessage(messageEl);
+    newGameButton(playAreaEl);
+  } else if (playerSum === 21) {
+    renderSum(updateSum(playerArr), playerSumEl);
+    revealDealerCards(dealerArr, dealerSideEl);
+    renderMessage(messageEl);
+    newGameButton(playAreaEl);
+  }
+}
+
+function resetGame() {
+  console.log("resetGame works!");
+  // Reset global variables
+  // Remove event listeners
+  // Calls main game function
+  // init();
 }
