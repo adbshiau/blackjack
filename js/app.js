@@ -1,4 +1,3 @@
-
 // DEFINE CONSTANTS
 const suits = ["s", "c", "d", "h"];
 const ranks = [
@@ -92,9 +91,9 @@ function renderOneCardFaceDown(deck, container) {
   container.innerHTML = card1HTML + card2HTML;
 }
 
+// RENDER PLAYERS CARDS AT THE BEGINNING OF THE GAME
 function renderCards(hands, container) {
   container.innerHTML = "";
-
   hands.forEach((hand) => {
     container.innerHTML += `<div class="card ${hand.face}"></div>`;
   });
@@ -103,15 +102,22 @@ function renderCards(hands, container) {
 
 function addCard(arr, container) {
   arr.push(shuffledDeck[cardsArr.length]);
-
   container.innerHTML = "";
-  let cardHTML = "";
-
-  cardHTML += `<div class="card ${arr[cardsArr.length - 2].face}"></div>`;
-
+  // let cardHTML = "";
+  // cardHTML += `<div class="card ${arr[cardsArr.length - 2].face}"></div>`;
   container.innerHTML = renderCards(playerArr, playerSideEl);
   cardsArr = playerArr.concat(dealerArr);
   playerSum = updateSum(playerArr);
+}
+
+function addDealerCard(arr, container) {
+  arr.push(shuffledDeck[cardsArr.length]);
+  container.innerHTML = "";
+  // let cardHTML = "";
+  // cardHTML += `<div class="card ${arr[cardsArr.length - 2].face}"></div>`;
+  container.innerHTML = renderCards(dealerArr, dealerSideEl);
+  cardsArr = dealerArr.concat(playerArr);
+  dealerSum = updateSum(dealerArr);
 }
 
 // INITIAL CONTROLLER FUNCTION
@@ -130,6 +136,7 @@ function init(e) {
   playerSum = 0;
   cardsArr = [];
   message = "";
+
   for (let i = 0; i < 4; i++) {
     dealerArr.push(shuffledDeck[i]);
     i++;
@@ -167,10 +174,10 @@ function renderHitStandButton(container) {
   container.innerHTML = hitButton + standButton;
 }
 
-// REVEAL DEALER CARDS IF STAND IS CLICKED
+// REVEAL DEALER CARDS WHEN STAND IS CLICKED
 function revealDealerCards(arr, container) {
   renderCards(arr, container);
-  dealerSum = updateSum(dealerArr);
+  // dealerSum = updateSum(dealerArr);
   renderSum(dealerSum, dealerSumEl);
 }
 
@@ -188,17 +195,18 @@ function renderSum(sum, container) {
   return (container.innerText = sum);
 }
 
+// RENDER WIN/LOSE MESSAGE
 function renderMessage(container) {
   if (playerSum > 21) {
     container.innerText = "Bust! Dealer won!";
-  } else if (playerSum < dealerSum && dealerSum < 21) {
+  } else if (playerSum < dealerSum && dealerSum <= 21) {
     container.innerText = "Dealer won!";
   } else if (playerSum > dealerSum) {
-    container.innerText = "You won!";
+    container.innerText = "You beat the dealer!";
   } else if (playerSum === dealerSum) {
     container.innerText = "Draw!";
   } else if (playerSum < dealerSum && dealerSum > 21) {
-    container.innerText = "You won!";
+    container.innerText = " Dealer bust. You won!";
   }
 }
 
@@ -206,54 +214,47 @@ function renderMessage(container) {
 function newGameButton(container) {
   container.innerHTML = "";
   let newGameButton = "";
-
   newGameButton += `<button id="new-game-button">NEW GAME</button>`;
   container.innerHTML = newGameButton;
 }
 
-function addDealerCard(arr, container) {
-  if (dealerSum < 17) {
-    arr.push(shuffledDeck[cardsArr.length]);
-
-    container.innerHTML = "";
-    let cardHTML = "";
-
-    cardHTML += `<div class="card ${arr[cardsArr.length - 2].face}"></div>`;
-
-    container.innerHTML = renderCards(dealerArr, dealerSideEl);
-    cardsArr = dealerArr.concat(playerArr);
-    dealerSum = updateSum(dealerArr);
-  }
-}
-
+// STAND BUTTON
 function stand() {
-  addDealerCard(dealerArr, dealerSideEl);
-  revealDealerCards(dealerArr, dealerSideEl);
+  dealerSum = updateSum(dealerArr);
+  console.log("it works!");
+  if (dealerSum > 17) {
+    revealDealerCards(dealerArr, dealerSideEl);
+  } else {
+    while (dealerSum < 17) {
+      addDealerCard(dealerArr, dealerSideEl);
+      renderSum(updateSum(dealerArr), dealerSumEl);
+    }
+    revealDealerCards(dealerArr, dealerSideEl);
+  }
+  renderSum(updateSum(dealerArr), dealerSumEl);
   renderMessage(messageEl);
   newGameButton(playAreaEl);
 }
 
+// HIT BUTTON
 function hit() {
-  addCard(playerArr, playerSideEl);
-  if (playerSum < 21) {
+  if (playerSum <= 21) {
+    addCard(playerArr, playerSideEl);
     renderSum(updateSum(playerArr), playerSumEl);
-  } else if (playerSum > 21) {
-    renderSum(updateSum(playerArr), playerSumEl);
-    revealDealerCards(dealerArr, dealerSideEl);
+    if (playerSum > 21) {
+      renderSum(updateSum(playerArr), playerSumEl);
+      stand();
+    }
+  } else {
     renderMessage(messageEl);
-    newGameButton(playAreaEl);
-  } else if (playerSum === 21) {
-    renderSum(updateSum(playerArr), playerSumEl);
-    revealDealerCards(dealerArr, dealerSideEl);
-    renderMessage(messageEl);
-    newGameButton(playAreaEl);
   }
 }
 
-function resetGame() {
-  console.log("resetGame works!");
-  // Reset global variables
-  // Remove event listeners
-  // Calls main game function
-  // init();
-}
+
+// RESETS THE GAME
+// function resetGame() {
+//   // Reset global variables
+//   // Remove event listeners
+//   // Calls main game function
+//   // init();
+// }
