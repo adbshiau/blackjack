@@ -257,11 +257,12 @@ function hit() {
 
 // RESETS THE GAME
 function resetGame() {
-  // Reset global variables
   shuffledDeck = getNewShuffledDeck();
   init();
-  
-  // Remove event listeners
-  // Calls main game function
-  // init();
+}
+
+function changeValueOfA() {
+  if (card.face.includes("A")) {
+    card.value === 1;
+  }
 }
