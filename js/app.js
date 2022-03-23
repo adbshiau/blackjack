@@ -267,3 +267,5 @@ function changeValueOfA(card) {
     card.value = 1
   }
 }
+
+console.log(playerArr);
