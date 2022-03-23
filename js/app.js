@@ -25,6 +25,8 @@ let dealerArr;
 let playerArr;
 let cardsArr;
 let message;
+let bet;
+let bank;
 
 // DOM ELEMENTS TO BE UPDATED
 const dealerSumEl = document.querySelector("#dealer-sum");
@@ -34,6 +36,11 @@ const playerSumEl = document.querySelector("#player-sum");
 const playerSideEl = document.querySelector(".player-side");
 const playAreaEl = document.querySelector(".play-area");
 const playBtn = document.querySelector("#play-button");
+const betEl = document.querySelector("#bet");
+const bankEl = document.querySelector("#bank");
+const fiveBtn = document.querySelector("#five");
+const tenBtn = document.querySelector("#ten");
+const twentyBtn = document.querySelector("#twenty");
 
 // ADD EVENT LISTENERS
 playBtn.addEventListener("click", init);
@@ -47,6 +54,13 @@ playAreaEl.addEventListener("click", function (e) {
     resetGame();
   }
 });
+
+fiveBtn.addEventListener("click", );
+
+tenBtn.addEventListener("click", );
+
+twentyBtn.addEventListener("click", );
+
 
 // MASTER DECK
 function buildMasterDeck() {
