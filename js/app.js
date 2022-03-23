@@ -38,6 +38,7 @@ const playAreaEl = document.querySelector(".play-area");
 const playBtn = document.querySelector("#play-button");
 const betEl = document.querySelector("#bet");
 const bankEl = document.querySelector("#bank");
+const clearBetBtn = document.querySelector("#clear-bet");
 const fiveBtn = document.querySelector("#five");
 const tenBtn = document.querySelector("#ten");
 const twentyBtn = document.querySelector("#twenty");
@@ -55,7 +56,9 @@ playAreaEl.addEventListener("click", function (e) {
   }
 });
 
-fiveBtn.addEventListener("click", );
+clearBetBtn.addEventListener("click", );
+
+fiveBtn.addEventListener("click", addFive);
 
 tenBtn.addEventListener("click", );
 
@@ -148,6 +151,8 @@ function init(e) {
   playerSum = 0;
   cardsArr = [];
   message = "";
+  bet = 0;
+  bank = 100;
 
   for (let i = 0; i < 4; i++) {
     dealerArr.push(shuffledDeck[i]);
@@ -282,4 +287,8 @@ function changeValueOfA(card) {
   }
 }
 
-console.log(playerArr);
+function addFive() {
+  bank = bank - 5;
+  bet = bet + 5;
+  
+}
