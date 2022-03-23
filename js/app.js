@@ -102,9 +102,8 @@ function renderCards(hands, container) {
 
 function addCard(arr, container) {
   arr.push(shuffledDeck[cardsArr.length]);
+  changeValueOfA(shuffledDeck[cardsArr.length]);
   container.innerHTML = "";
-  // let cardHTML = "";
-  // cardHTML += `<div class="card ${arr[cardsArr.length - 2].face}"></div>`;
   container.innerHTML = renderCards(playerArr, playerSideEl);
   cardsArr = playerArr.concat(dealerArr);
   playerSum = updateSum(playerArr);
@@ -113,8 +112,7 @@ function addCard(arr, container) {
 function addDealerCard(arr, container) {
   arr.push(shuffledDeck[cardsArr.length]);
   container.innerHTML = "";
-  // let cardHTML = "";
-  // cardHTML += `<div class="card ${arr[cardsArr.length - 2].face}"></div>`;
+  changeValueOfA(shuffledDeck[cardsArr.length]);
   container.innerHTML = renderCards(dealerArr, dealerSideEl);
   cardsArr = dealerArr.concat(playerArr);
   dealerSum = updateSum(dealerArr);
@@ -206,12 +204,16 @@ function renderMessage(container) {
     container.innerText = "Dealer won!";
   } else if (playerSum > dealerSum && playerSum <= 21) {
     container.innerText = "You beat the dealer!";
-  } else if (playerSum === dealerSum) {
+  } else if (playerSum === dealerSum && playerSum <= 21) {
     container.innerText = "Draw!";
   } else if (playerSum < dealerSum && dealerSum > 21) {
     container.innerText = " Dealer bust. You won!";
   } else if (playerSum > 21 && dealerSum > 21) {
     container.innerText = "BUST!"
+  } else if (dealerSum > playerSum && dealerSum > 21 && playerSum > 21) {
+    container.innerText = "BUST!";
+  } else if (dealerSum === playerSum && dealerSum > 21 && playerSum > 21) {
+    container.innerText = "BUST!";
   }
 }
 
@@ -226,7 +228,6 @@ function newGameButton(container) {
 // STAND BUTTON
 function stand() {
   dealerSum = updateSum(dealerArr);
-  console.log("it works!");
   if (dealerSum > 17) {
     revealDealerCards(dealerArr, dealerSideEl);
   } else {
@@ -261,8 +262,8 @@ function resetGame() {
   init();
 }
 
-function changeValueOfA() {
+function changeValueOfA(card) {
   if (card.face.includes("A")) {
-    card.value === 1;
+    card.value = 1
   }
 }
