@@ -25,8 +25,8 @@ let dealerArr;
 let playerArr;
 let cardsArr;
 let message;
-let bet;
-let bank;
+let bet = 0;
+let bank = 100;
 
 // DOM ELEMENTS TO BE UPDATED
 const dealerSumEl = document.querySelector("#dealer-sum");
@@ -56,13 +56,13 @@ playAreaEl.addEventListener("click", function (e) {
   }
 });
 
-clearBetBtn.addEventListener("click", );
+clearBetBtn.addEventListener("click", clearBet);
 
 fiveBtn.addEventListener("click", addFive);
 
-tenBtn.addEventListener("click", );
+// tenBtn.addEventListener("click", addTen);
 
-twentyBtn.addEventListener("click", );
+// twentyBtn.addEventListener("click", addTwenty);
 
 
 // MASTER DECK
@@ -151,8 +151,11 @@ function init(e) {
   playerSum = 0;
   cardsArr = [];
   message = "";
-  bet = 0;
-  bank = 100;
+
+  if (bet === 0) {
+    messageEl.innerText = "You must place a bet!"
+    return;
+  }
 
   for (let i = 0; i < 4; i++) {
     dealerArr.push(shuffledDeck[i]);
@@ -290,5 +293,27 @@ function changeValueOfA(card) {
 function addFive() {
   bank = bank - 5;
   bet = bet + 5;
-  
+  betEl.innerText = `BET-${bet}`;
+  bankEl.innerText = `BANK-${bank}`;
+}
+
+// function addTen() {
+//   bank = bank - 10;
+//   bet = bet + 10;
+//   betEl.innerText = `BET-${bet}`;
+//   bankEl.innerText = `BANK-${bank}`;
+// }
+
+// function addTwenty() {
+//   bank = bank - 20;
+//   bet = bet + 20;
+//   betEl.innerText = `BET-${bet}`;
+//   bankEl.innerText = `BANK-${bank}`;
+// }
+
+function clearBet() {
+  bank = bank + bet;
+  bet = 0;
+  betEl.innerText = `BET-${bet}`;
+  bankEl.innerText = `BANK-${bank}`;
 }
