@@ -16,9 +16,12 @@ const ranks = [
   "A",
 ];
 const masterDeck = buildMasterDeck();
-let shuffledDeck = getNewShuffledDeck();
+const clickAudio = new Audio();
+clickAudio.src="assets/audio/click_button.mp3";
+
 
 // DEFINE STATE VARIABLES
+let shuffledDeck;
 let dealerSum;
 let playerSum;
 let dealerArr;
@@ -145,12 +148,15 @@ function init(e) {
   // }
 
   // SET INITIAL FUNCTION OF THE STATE VARIABLES
+  shuffledDeck = getNewShuffledDeck();
   dealerArr = [];
   dealerSum = 0;
   playerArr = [];
   playerSum = 0;
   cardsArr = [];
   message = "";
+
+  clickAudio.play();
 
   if (bet === 0) {
     messageEl.innerText = "You must place a bet!"
@@ -249,6 +255,7 @@ function newGameButton(container) {
 
 // STAND BUTTON
 function stand() {
+  clickAudio.play();
   dealerSum = updateSum(dealerArr);
   if (dealerSum > 17) {
     revealDealerCards(dealerArr, dealerSideEl);
@@ -266,6 +273,7 @@ function stand() {
 
 // HIT BUTTON
 function hit() {
+  clickAudio.play();
   if (playerSum <= 21) {
     addCard(playerArr, playerSideEl);
     renderSum(updateSum(playerArr), playerSumEl);
@@ -280,7 +288,7 @@ function hit() {
 
 // RESETS THE GAME
 function resetGame() {
-  shuffledDeck = getNewShuffledDeck();
+  clickAudio.play();
   init();
 }
 
@@ -291,6 +299,7 @@ function changeValueOfA(card) {
 }
 
 function addFive() {
+  clickAudio.play();
   bank = bank - 5;
   bet = bet + 5;
   betEl.innerText = `BET-${bet}`;
@@ -312,6 +321,7 @@ function addFive() {
 // }
 
 function clearBet() {
+  clickAudio.play();
   bank = bank + bet;
   bet = 0;
   betEl.innerText = `BET-${bet}`;
