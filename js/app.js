@@ -174,9 +174,6 @@ function init(e) {
 
   cardsArr = cardsArr.concat(playerArr, dealerArr);
 
-  dealerSum = updateSum(dealerArr);
-  playerSum = updateSum(playerArr);
-
   if (playerArr[0].face.includes("A") && playerArr[1].face.includes("A")) {
     playerArr[0].value = 1;
     console.log("LOOK")
@@ -185,6 +182,9 @@ function init(e) {
     dealerArr[0].value = 1;
     console.log("LOOK")
   }
+  dealerSum = updateSum(dealerArr);
+  playerSum = updateSum(playerArr);
+
   render();
 }
 
@@ -236,6 +236,7 @@ function renderMessage(container) {
   if (playerSum === 21) {
     if (dealerSum === 21) {
       container.innerText = "It's a draw!";
+      draw();
     } else if (dealerSum > 21) {
       container.innerText = "21! You beat the dealer!";
       winner();
@@ -243,6 +244,7 @@ function renderMessage(container) {
   }
   if (playerSum > 21 && dealerSum > 21) {
     container.innerText = "BUST!!"
+    loser();
   }
   if (playerSum > dealerSum) {
     if (playerSum <= 21) {
@@ -250,23 +252,28 @@ function renderMessage(container) {
       winner();
     } else if (playerSum > 21 && dealerSum <= 21) {
       container.innerText = "Bust! Dealer won.";
+      loser();
     }
   }
   if (playerSum < dealerSum) {
     if (dealerSum <= 21) {
       container.innerText = "Dealer won!";
+      loser();
     } else if (dealerSum > 21) {
       container.innerText = "Dealer bust. You won!";
       winner();
     } else if (playerSum > 21) {
       container.innerText = "BUST!!!"
+      loser();
     }
   }
   if (playerSum === dealerSum) {
     if (playerSum > 21 && dealerSum > 21) {
       container.innerText = "BUST!";
+      loser();
     } else if (playerSum <= 21) {
       container.innerText = "Draw!";
+      draw();
     }
   }
 }
@@ -303,6 +310,12 @@ function hit() {
   dealCardAudio.play();
   if (playerSum <= 21) {
     addCard(playerArr, playerSideEl);
+    if (playerArr[0].face.includes("A")) {
+      playerArr[0].value = 1;
+    }
+    if (playerArr[1].face.includes("A")) {
+      playerArr[1].value = 1;
+    }
     renderSum(updateSum(playerArr), playerSumEl);
     if (playerSum > 21) {
       renderSum(updateSum(playerArr), playerSumEl);
@@ -363,6 +376,15 @@ function winner() {
   bankEl.innerText = `BANK-${bank}`;
 }
 
-// function draw() {
-  
-// }
+function draw() {
+  bank = bet + bank;
+  bet = 0;
+  betEl.innerText = "BET-0";
+  bankEl.innerText = `BANK-${bank}`;
+}
+
+function loser() {
+  bet = 0;
+  betEl.innerText = "BET-0";
+  bankEl.innerText = `BANK-${bank}`;
+}
