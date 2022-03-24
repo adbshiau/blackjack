@@ -25,6 +25,8 @@ const loserAudio = new Audio;
 loserAudio.src = "assets/audio/loser.mp3";
 const drawAudio = new Audio;
 drawAudio.src = "assets/audio/draw.mp3";
+const noMoreFundsAudio = new Audio;
+noMoreFundsAudio.src = "assets/audio/no_funds/mp3";
 
 // DEFINE STATE VARIABLES
 let masterDeck;
@@ -371,6 +373,7 @@ function addFive() {
     betEl.innerText = `BET-${bet}`;
     bankEl.innerText = `BANK-${bank}`;
   } else {
+    noMoreFundsAudio.play();
     messageEl.innerText = "Not enough funds!";
   }
 }
@@ -384,6 +387,7 @@ function addTen() {
     betEl.innerText = `BET-${bet}`;
     bankEl.innerText = `BANK-${bank}`;
   } else {
+    noMoreFundsAudio.play();
     messageEl.innerText = "Not enough funds!";
   }
 }
@@ -397,6 +401,7 @@ function addTwenty() {
     betEl.innerText = `BET-${bet}`;
     bankEl.innerText = `BANK-${bank}`;
   } else {
+    noMoreFundsAudio.play();
     messageEl.innerText = "Not enough funds!";
   }
 }
