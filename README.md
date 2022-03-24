@@ -6,11 +6,13 @@ Launch the game: https://adbshiau.github.io/blackjack/
 
 ## Screenshots
 
+<p float="left">
 <img src="/assets/images/home.png" width="400">
-<img src="/assets/images/starting cards.png" width="400">
+<img src="/assets/images/starting cards.png" width="400" height="380">
 <img src="/assets/images/player won.png" width="400">
 <img src="/assets/images/dealer won.png" width="400">
-
+</p>
+  
 ## Technologies Used
 
 * JavaScript
