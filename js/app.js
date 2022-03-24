@@ -133,7 +133,7 @@ function addDealerCard(arr, container) {
   arr.push(shuffledDeck[cardsArr.length]);
   container.innerHTML = "";
   if (shuffledDeck[cardsArr.length].face.includes("A")) {
-    changeValueOfA(dealerArr[dealerArr.length]);
+    changeValueOfA(dealerArr[dealerArr.length - 1]);
   } else if (dealerArr[0].face.includes("A")) {
     changeValueOfA(dealerArr[0]);
   } else if (dealerArr[1].face.includes("A")) {
@@ -189,7 +189,7 @@ function init(e) {
   }
   playerSum = updateSum(playerArr);
   dealerSum = updateSum(dealerArr);
-  
+
   render();
 }
 
@@ -264,7 +264,7 @@ function renderMessage(container) {
     if (dealerSum <= 21) {
       container.innerText = "Dealer won!";
       loser();
-    } else if (dealerSum > 21) {
+    } else if (dealerSum > 21 && playerSum <= 21) {
       container.innerText = "Dealer bust. You won!";
       winner();
     } else if (playerSum > 21) {
@@ -294,13 +294,12 @@ function newGameButton(container) {
 // STAND BUTTON
 function stand() {
   clickAudio.play();
-  dealerSum = updateSum(dealerArr);
   if (dealerSum > 17) {
     revealDealerCards(dealerArr, dealerSideEl);
   } else {
     while (dealerSum < 17) {
       addDealerCard(dealerArr, dealerSideEl);
-      renderSum(updateSum(dealerArr), dealerSumEl);
+      updateSum(dealerArr);
     }
     revealDealerCards(dealerArr, dealerSideEl);
   }
@@ -325,14 +324,17 @@ function hit() {
       updateSum(playerArr);
     }
     renderSum(updateSum(playerArr), playerSumEl);
-    if (playerSum > 21) {
-      renderSum(updateSum(playerArr), playerSumEl);
-      stand();
-    }
-  } else {
-    renderMessage(messageEl);
   }
+  playerSum = updateSum(playerArr);
+  if (playerSum > 21) {
+    renderSum(updateSum(playerArr), playerSumEl);
+    stand();
+  }
+  //  else {
+  //   renderMessage(messageEl);
+  // }  
 }
+
 
 // RESETS THE GAME
 function resetGame() {
