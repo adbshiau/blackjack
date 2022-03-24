@@ -189,6 +189,8 @@ function init(e) {
   playerSum = updateSum(playerArr);
   dealerSum = updateSum(dealerArr);
 
+  dealCardAudio.play();
+  
   render();
 }
 
