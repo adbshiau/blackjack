@@ -19,6 +19,8 @@ const clickAudio = new Audio();
 clickAudio.src = "assets/audio/click_button.mp3";
 const dealCardAudio = new Audio();
 dealCardAudio.src = "assets/audio/deal_card.mp3";
+const winnerAudio = new Audio;
+winnerAudio.src = "assets/audio/winner.mp3";
 
 // DEFINE STATE VARIABLES
 let masterDeck;
@@ -245,6 +247,7 @@ function renderMessage(container) {
       draw();
     } else if (dealerSum > 21) {
       container.innerText = "21! You beat the dealer!";
+      winnerAudio.play();
       winner();
     }
   }
@@ -255,6 +258,7 @@ function renderMessage(container) {
   if (playerSum > dealerSum) {
     if (playerSum <= 21) {
       container.innerText = "You won!";
+      winnerAudio.play();
       winner();
     } else if (playerSum > 21 && dealerSum <= 21) {
       container.innerText = "Bust! Dealer won.";
@@ -267,6 +271,7 @@ function renderMessage(container) {
       loser();
     } else if (dealerSum > 21 && playerSum <= 21) {
       container.innerText = "Dealer bust. You won!";
+      winnerAudio.play();
       winner();
     } else if (playerSum > 21) {
       container.innerText = "BUST!!!";
