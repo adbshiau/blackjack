@@ -16,10 +16,9 @@ const ranks = [
   "A",
 ];
 const clickAudio = new Audio();
-clickAudio.src="assets/audio/click_button.mp3";
+clickAudio.src = "assets/audio/click_button.mp3";
 const dealCardAudio = new Audio();
-dealCardAudio.src="assets/audio/deal_card.mp3";
-
+dealCardAudio.src = "assets/audio/deal_card.mp3";
 
 // DEFINE STATE VARIABLES
 let masterDeck;
@@ -65,10 +64,9 @@ clearBetBtn.addEventListener("click", clearBet);
 
 fiveBtn.addEventListener("click", addFive);
 
-// tenBtn.addEventListener("click", addTen);
+tenBtn.addEventListener("click", addTen);
 
-// twentyBtn.addEventListener("click", addTwenty);
-
+twentyBtn.addEventListener("click", addTwenty);
 
 // MASTER DECK
 function buildMasterDeck() {
@@ -134,7 +132,13 @@ function addCard(arr, container) {
 function addDealerCard(arr, container) {
   arr.push(shuffledDeck[cardsArr.length]);
   container.innerHTML = "";
-  changeValueOfA(shuffledDeck[cardsArr.length]);
+  if (shuffledDeck[cardsArr.length].face.includes("A")) {
+    changeValueOfA(dealerArr[dealerArr.length]);
+  } else if (dealerArr[0].face.includes("A")) {
+    changeValueOfA(dealerArr[0]);
+  } else if (dealerArr[1].face.includes("A")) {
+    changeValueOfA(dealerArr[1]);
+  }
   container.innerHTML = renderCards(dealerArr, dealerSideEl);
   cardsArr = dealerArr.concat(playerArr);
   dealerSum = updateSum(dealerArr);
@@ -162,7 +166,7 @@ function init(e) {
   clickAudio.play();
 
   if (bet === 0) {
-    messageEl.innerText = "You must place a bet!"
+    messageEl.innerText = "You must place a bet!";
     return;
   }
 
@@ -176,15 +180,16 @@ function init(e) {
 
   if (playerArr[0].face.includes("A") && playerArr[1].face.includes("A")) {
     playerArr[0].value = 1;
-    console.log("LOOK")
+    console.log("LOOK");
   }
   if (dealerArr[0].face.includes("A") && dealerArr[1].face.includes("A")) {
     dealerArr[0].value = 1;
-    console.log("LOOK")
+    dealerArr[1].value = 1;
+    console.log("LOOK");
   }
-  dealerSum = updateSum(dealerArr);
   playerSum = updateSum(playerArr);
-
+  dealerSum = updateSum(dealerArr);
+  
   render();
 }
 
@@ -243,7 +248,7 @@ function renderMessage(container) {
     }
   }
   if (playerSum > 21 && dealerSum > 21) {
-    container.innerText = "BUST!!"
+    container.innerText = "BUST!!";
     loser();
   }
   if (playerSum > dealerSum) {
@@ -263,7 +268,7 @@ function renderMessage(container) {
       container.innerText = "Dealer bust. You won!";
       winner();
     } else if (playerSum > 21) {
-      container.innerText = "BUST!!!"
+      container.innerText = "BUST!!!";
       loser();
     }
   }
@@ -308,13 +313,16 @@ function stand() {
 function hit() {
   clickAudio.play();
   dealCardAudio.play();
+  playerSum = updateSum(playerArr);
   if (playerSum <= 21) {
     addCard(playerArr, playerSideEl);
     if (playerArr[0].face.includes("A")) {
       playerArr[0].value = 1;
+      updateSum(playerArr);
     }
     if (playerArr[1].face.includes("A")) {
       playerArr[1].value = 1;
+      updateSum(playerArr);
     }
     renderSum(updateSum(playerArr), playerSumEl);
     if (playerSum > 21) {
@@ -334,31 +342,44 @@ function resetGame() {
 
 function changeValueOfA(card) {
   if (card.face.includes("A")) {
-    card.value = 1
+    card.value = 1;
   }
 }
 
 function addFive() {
   clickAudio.play();
-  bank = bank - 5;
-  bet = bet + 5;
-  betEl.innerText = `BET-${bet}`;
-  bankEl.innerText = `BANK-${bank}`;
+  if (bank >= 5) {
+    bank = bank - 5;
+    bet = bet + 5;
+    betEl.innerText = `BET-${bet}`;
+    bankEl.innerText = `BANK-${bank}`;
+  } else {
+    messageEl.innerText = "Not enough funds!";
+  }
 }
 
-// function addTen() {
-//   bank = bank - 10;
-//   bet = bet + 10;
-//   betEl.innerText = `BET-${bet}`;
-//   bankEl.innerText = `BANK-${bank}`;
-// }
+function addTen() {
+  clickAudio.play();
+  if (bank >= 10) {
+    bank = bank - 10;
+    bet = bet + 10;
+    betEl.innerText = `BET-${bet}`;
+    bankEl.innerText = `BANK-${bank}`;
+  } else {
+    messageEl.innerText = "Not enough funds!";
+  }
+}
 
-// function addTwenty() {
-//   bank = bank - 20;
-//   bet = bet + 20;
-//   betEl.innerText = `BET-${bet}`;
-//   bankEl.innerText = `BANK-${bank}`;
-// }
+function addTwenty() {
+  if (bank >= 20) {
+    bank = bank - 20;
+    bet = bet + 20;
+    betEl.innerText = `BET-${bet}`;
+    bankEl.innerText = `BANK-${bank}`;
+  } else {
+    messageEl.innerText = "Not enough funds!";
+  }
+}
 
 function clearBet() {
   clickAudio.play();
