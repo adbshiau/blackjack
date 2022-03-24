@@ -48,27 +48,27 @@ const tenBtn = document.querySelector("#ten");
 const twentyBtn = document.querySelector("#twenty");
 
 // ADD EVENT LISTENERS
-playBtn.addEventListener("click", init);
+playBtn.addEventListener("click", init); // play button
 
 playAreaEl.addEventListener("click", function (e) {
-  if (e.target.matches("#stand-button")) {
+  if (e.target.matches("#stand-button")) { // stand button
     stand();
-  } else if (e.target.matches("#hit-button")) {
+  } else if (e.target.matches("#hit-button")) { // hit button
     hit();
-  } else if (e.target.matches("#new-game-button")) {
+  } else if (e.target.matches("#new-game-button")) { // new game button
     resetGame();
   }
 });
 
-clearBetBtn.addEventListener("click", clearBet);
+clearBetBtn.addEventListener("click", clearBet); // clear player bet
 
-fiveBtn.addEventListener("click", addFive);
+fiveBtn.addEventListener("click", addFive); // five dollar chip
 
-tenBtn.addEventListener("click", addTen);
+tenBtn.addEventListener("click", addTen); // ten dollar chip
 
-twentyBtn.addEventListener("click", addTwenty);
+twentyBtn.addEventListener("click", addTwenty); // twenty dollar chip
 
-// MASTER DECK
+// POPULATE MASTER DECK ARRAY
 function buildMasterDeck() {
   const deck = [];
   // Use nested forEach to generate card objects
@@ -85,7 +85,7 @@ function buildMasterDeck() {
   return deck;
 }
 
-// SHUFFLED DECK
+// POPULATE SHUFFLED DECK ARRAY
 function getNewShuffledDeck() {
   // Create a copy of the masterDeck (leave masterDeck untouched!)
   const tempDeck = [...masterDeck];
@@ -99,7 +99,7 @@ function getNewShuffledDeck() {
   return newShuffledDeck;
 }
 
-// RENDER DEALERS CARDS AT THE BEGINNING OF THE GAME
+// RENDER DEALER CARDS AT THE BEGINNING OF THE GAME
 function renderOneCardFaceDown(deck, container) {
   container.innerHTML = "";
   let card1HTML = "";
@@ -111,7 +111,7 @@ function renderOneCardFaceDown(deck, container) {
   container.innerHTML = card1HTML + card2HTML;
 }
 
-// RENDER PLAYERS CARDS AT THE BEGINNING OF THE GAME
+// RENDER PLAYER CARDS AT THE BEGINNING OF THE GAME
 function renderCards(hands, container) {
   container.innerHTML = "";
   hands.forEach((hand) => {
@@ -120,6 +120,7 @@ function renderCards(hands, container) {
   return container.innerHTML;
 }
 
+// ADD PLAYER CARD
 function addCard(arr, container) {
   arr.push(shuffledDeck[cardsArr.length]);
   changeValueOfA(shuffledDeck[cardsArr.length]);
@@ -129,6 +130,7 @@ function addCard(arr, container) {
   playerSum = updateSum(playerArr);
 }
 
+// ADD DEALER CARD
 function addDealerCard(arr, container) {
   arr.push(shuffledDeck[cardsArr.length]);
   container.innerHTML = "";
@@ -146,14 +148,7 @@ function addDealerCard(arr, container) {
 
 // INITIAL CONTROLLER FUNCTION
 function init(e) {
-  // New discovery - SET object
-  // dealerSet = new Set();
-  // playerSet = new Set();
-  // for (let i = 0; i < 2; i++) {
-  //   dealerSet.add(Math.floor(Math.random() * masterDeck.length));
-  // }
 
-  // SET INITIAL FUNCTION OF THE STATE VARIABLES
   masterDeck = buildMasterDeck();
   shuffledDeck = getNewShuffledDeck();
   dealerArr = [];
@@ -165,23 +160,27 @@ function init(e) {
 
   clickAudio.play();
 
+  // Player needs to place a bet to start the game
   if (bet === 0) {
     messageEl.innerText = "You must place a bet!";
     return;
   }
 
+  // Populate player cards array and dealer cards array
   for (let i = 0; i < 4; i++) {
     dealerArr.push(shuffledDeck[i]);
     i++;
     playerArr.push(shuffledDeck[i]);
   }
 
+  // Combine cards into cards array
   cardsArr = cardsArr.concat(playerArr, dealerArr);
 
+  // If both player cards are aces, second ace value becomes 1
   if (playerArr[0].face.includes("A") && playerArr[1].face.includes("A")) {
     playerArr[0].value = 1;
-    console.log("LOOK");
   }
+  // If both dealer cards are aces, both cards value becomes 1
   if (dealerArr[0].face.includes("A") && dealerArr[1].face.includes("A")) {
     dealerArr[0].value = 1;
     dealerArr[1].value = 1;
@@ -193,7 +192,7 @@ function init(e) {
   render();
 }
 
-// RENDER INITIAL CARDS, SUM, AND HIT & STAND BUTTON
+// RENDER INITIAL CARDS, SUM, HIT/STAND BUTTONS, AND TAKES MESSAGE ON THE MIDDLE OF THE PLAY AREA OFF
 function render() {
   renderOneCardFaceDown(dealerArr, dealerSideEl);
   renderCards(playerArr, playerSideEl);
@@ -213,6 +212,7 @@ function renderHitStandButton(container) {
 
   hitButton += `<button id="hit-button">HIT</button>`;
   standButton += `<button id="stand-button">STAND</button>`;
+
   container.innerHTML = hitButton + standButton;
 }
 
@@ -222,7 +222,7 @@ function revealDealerCards(arr, container) {
   renderSum(dealerSum, dealerSumEl);
 }
 
-// UPDATE THE SUM
+// UPDATE THE SUM OF PLAYER/DEALER ARRAY
 function updateSum(arr) {
   let sum = 0;
   for (let i = 0; i < arr.length; i++) {
@@ -330,11 +330,7 @@ function hit() {
     renderSum(updateSum(playerArr), playerSumEl);
     stand();
   }
-  //  else {
-  //   renderMessage(messageEl);
-  // }  
 }
-
 
 // RESETS THE GAME
 function resetGame() {
@@ -342,12 +338,14 @@ function resetGame() {
   init();
 }
 
+// CHANGES THE VALUE OF ACE
 function changeValueOfA(card) {
   if (card.face.includes("A")) {
     card.value = 1;
   }
 }
 
+// ADD FIVE DOLLAR CHIP
 function addFive() {
   clickAudio.play();
   if (bank >= 5) {
@@ -360,6 +358,7 @@ function addFive() {
   }
 }
 
+// ADD TEN DOLLAR CHIP
 function addTen() {
   clickAudio.play();
   if (bank >= 10) {
@@ -372,7 +371,9 @@ function addTen() {
   }
 }
 
+// ADD TWENTY DOLLAR CHIP
 function addTwenty() {
+  clickAudio.play();
   if (bank >= 20) {
     bank = bank - 20;
     bet = bet + 20;
@@ -383,6 +384,7 @@ function addTwenty() {
   }
 }
 
+// CLEAR BET BUTTON
 function clearBet() {
   clickAudio.play();
   bank = bank + bet;
@@ -391,6 +393,7 @@ function clearBet() {
   bankEl.innerText = `BANK-${bank}`;
 }
 
+// UPDATE BET AND BANK IF PLAYER WINS
 function winner() {
   bet = bet * 2;
   bank = bank + bet;
@@ -399,6 +402,7 @@ function winner() {
   bankEl.innerText = `BANK-${bank}`;
 }
 
+// UPDATE BET AND BANK IF ITS A DRAW
 function draw() {
   bank = bet + bank;
   bet = 0;
@@ -406,6 +410,7 @@ function draw() {
   bankEl.innerText = `BANK-${bank}`;
 }
 
+// UPDATE BET AND BANK IF PLAYER LOST
 function loser() {
   bet = 0;
   betEl.innerText = "BET-0";
