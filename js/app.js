@@ -184,7 +184,6 @@ function init(e) {
   if (dealerArr[0].face.includes("A") && dealerArr[1].face.includes("A")) {
     dealerArr[0].value = 1;
     dealerArr[1].value = 1;
-    console.log("LOOK");
   }
   playerSum = updateSum(playerArr);
   dealerSum = updateSum(dealerArr);
