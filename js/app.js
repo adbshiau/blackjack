@@ -238,6 +238,7 @@ function renderMessage(container) {
       container.innerText = "It's a draw!";
     } else if (dealerSum > 21) {
       container.innerText = "21! You beat the dealer!";
+      winner();
     }
   }
   if (playerSum > 21 && dealerSum > 21) {
@@ -246,6 +247,7 @@ function renderMessage(container) {
   if (playerSum > dealerSum) {
     if (playerSum <= 21) {
       container.innerText = "You won!";
+      winner();
     } else if (playerSum > 21 && dealerSum <= 21) {
       container.innerText = "Bust! Dealer won.";
     }
@@ -255,6 +257,9 @@ function renderMessage(container) {
       container.innerText = "Dealer won!";
     } else if (dealerSum > 21) {
       container.innerText = "Dealer bust. You won!";
+      winner();
+    } else if (playerSum > 21) {
+      container.innerText = "BUST!!!"
     }
   }
   if (playerSum === dealerSum) {
@@ -349,3 +354,15 @@ function clearBet() {
   betEl.innerText = `BET-${bet}`;
   bankEl.innerText = `BANK-${bank}`;
 }
+
+function winner() {
+  bet = bet * 2;
+  bank = bank + bet;
+  bet = 0;
+  betEl.innerText = "BET-0";
+  bankEl.innerText = `BANK-${bank}`;
+}
+
+// function draw() {
+  
+// }
