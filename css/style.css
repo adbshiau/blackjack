@@ -198,12 +198,25 @@ h3 {
   main {
     max-width: fit-content;
     max-height: fit-content;
-    font-size: 15px;
+    font-size: 12px;
+  }
+  .dealer-side {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .player-side {
+    display: flex;
+    flex-wrap: wrap;
   }
   .bet-area {
     display: flex;
     font-size: 10px;
     justify-content: space-between;
+  }
+  #play-button {
+    font-size: 7px;
+    width: 50px;
+    height: 30px;
   }
   #clear-bet {
     font-size: 7px;
