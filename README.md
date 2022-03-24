@@ -29,16 +29,19 @@ Launch the game: https://adbshiau.github.io/blackjack/
 6) If player's sum is more than dealer's sum, player's bet doubles and is added to the bank.
 7) The game keeps going until bank runs out.
 
-## Next Steps
+## Future Enhancements
 
 * Splitting pairs
 * Doubling down
 * Insurance
-* Adding more players
+* Adding more players to the game
 
 ## Assets Used
 
 Sound effects from https://www.zapsplat.com/
 * Multimedia button click 12
 * Playing card single deal on table 1
+* Short handling of poker chips 3
+* A handful of coins place into a persons hand 9
+* Game sound, coin error, glitch 1
 
