@@ -18,6 +18,8 @@ const ranks = [
 const masterDeck = buildMasterDeck();
 const clickAudio = new Audio();
 clickAudio.src="assets/audio/click_button.mp3";
+const dealCardAudio = new Audio();
+dealCardAudio.src="assets/audio/deal_card.mp3";
 
 
 // DEFINE STATE VARIABLES
@@ -274,6 +276,7 @@ function stand() {
 // HIT BUTTON
 function hit() {
   clickAudio.play();
+  dealCardAudio.play();
   if (playerSum <= 21) {
     addCard(playerArr, playerSideEl);
     renderSum(updateSum(playerArr), playerSumEl);
