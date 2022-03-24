@@ -6,10 +6,10 @@ Launch the game: https://adbshiau.github.io/blackjack/
 
 ## Screenshots
 
-![home](https://user-images.githubusercontent.com/63468278/160000248-dc52a925-3241-4c47-b451-4e02c1cd1544.png)
-![starting cards](https://user-images.githubusercontent.com/63468278/160000251-a01e4129-3db1-4252-adfc-afd496323402.png)
-![player won](https://user-images.githubusercontent.com/63468278/160000250-9cfbaa00-3720-4518-b9a1-84ed516ff19b.png)
-![dealer won](https://user-images.githubusercontent.com/63468278/160000245-4f38ab9b-117b-4c9c-9e1c-0510e45239a8.png)
+<img src="/assets/images/home.png" width="400">
+<img src="/assets/images/starting cards.png" width="400">
+<img src="/assets/images/player won.png" width="400">
+<img src="/assets/images/dealer won.png" width="400">
 
 ## Technologies Used
 
