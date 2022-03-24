@@ -280,10 +280,9 @@ function stand() {
   dealerSum = updateSum(dealerArr);
   if (dealerSum > 17) {
     revealDealerCards(dealerArr, dealerSideEl);
-  } else if (dealerSum < 17) {
+  } else {
     while (dealerSum < 17) {
       addDealerCard(dealerArr, dealerSideEl);
-
       renderSum(updateSum(dealerArr), dealerSumEl);
     }
     revealDealerCards(dealerArr, dealerSideEl);
