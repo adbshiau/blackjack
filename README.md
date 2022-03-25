@@ -4,7 +4,7 @@ This is a web browser game where the player attempts to beat the dealer by getti
 
 Launch the game: https://adbshiau.github.io/blackjack/
 
-## Screenshots
+## Wireframe
 
 <p float="left">
 <img src="/assets/images/home.png" width="400">
