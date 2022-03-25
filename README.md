@@ -36,6 +36,7 @@ Launch the game: https://adbshiau.github.io/blackjack/
 
 ## Future Enhancements
 
+* Mobile device design update
 * Larger bet denomination ($50 & $100)
 * Option to play with multiple players
 * Button to play again when bank runs out
