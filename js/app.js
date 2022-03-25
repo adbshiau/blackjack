@@ -26,7 +26,7 @@ loserAudio.src = "assets/audio/loser.mp3";
 const drawAudio = new Audio;
 drawAudio.src = "assets/audio/draw.mp3";
 const noMoreFundsAudio = new Audio;
-noMoreFundsAudio.src = "assets/audio/no_funds/mp3";
+noMoreFundsAudio.src = "assets/audio/no_funds.mp3";
 
 // DEFINE STATE VARIABLES
 let masterDeck;
