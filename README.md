@@ -46,4 +46,4 @@ Sound effects from https://www.zapsplat.com/
 * Short handling of poker chips 3
 * A handful of coins place into a persons hand 9
 * Game sound, coin error, glitch 1
-
+* Cartoon high pitched voice says, loser
