@@ -41,7 +41,6 @@ Launch the game: https://adbshiau.github.io/blackjack/
 * Option to play with multiple players
 * Button to play again when bank runs out
 * Splitting pairs
-* Doubling down
 * High score board
 
 ## Assets Used
