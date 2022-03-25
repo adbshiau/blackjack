@@ -40,8 +40,6 @@ h3 {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  /* align-items: center; */
-  /* justify-content: space-evenly; */
 }
 
 #face-down {
@@ -67,8 +65,6 @@ h3 {
   background-color: #00741b;
   display: flex;
   flex-direction: row;
-  /* align-items: center; */
-  /* justify-content: space-evenly; */
   justify-content: center;
 }
 
@@ -196,4 +192,50 @@ h3 {
   height: 43px;
   font-size: 10px;
   text-align: center;
+}
+
+@media only screen and (max-width: 768px) {
+  main {
+    max-width: fit-content;
+    max-height: fit-content;
+    font-size: 12px;
+  }
+  .dealer-side {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .player-side {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .bet-area {
+    display: flex;
+    font-size: 10px;
+    justify-content: space-between;
+  }
+  #play-button {
+    font-size: 7px;
+    width: 50px;
+    height: 30px;
+  }
+  #clear-bet {
+    font-size: 7px;
+    width: 50px;
+    height: 30px;
+  }
+  #five {
+    font-size: 7px;
+    width: 30px;
+    height: 30px;
+  }
+  #ten {
+    font-size: 7px;
+    width: 30px;
+    height: 30px;
+  }
+  #twenty {
+    font-size: 7px;
+    width: 30px;
+    height: 30px;
+  }
 }

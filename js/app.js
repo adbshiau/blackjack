@@ -19,6 +19,14 @@ const clickAudio = new Audio();
 clickAudio.src = "assets/audio/click_button.mp3";
 const dealCardAudio = new Audio();
 dealCardAudio.src = "assets/audio/deal_card.mp3";
+const winnerAudio = new Audio;
+winnerAudio.src = "assets/audio/winner.mp3";
+const loserAudio = new Audio;
+loserAudio.src = "assets/audio/loser.mp3";
+const drawAudio = new Audio;
+drawAudio.src = "assets/audio/draw.mp3";
+const noMoreFundsAudio = new Audio;
+noMoreFundsAudio.src = "assets/audio/no_funds.mp3";
 
 // DEFINE STATE VARIABLES
 let masterDeck;
@@ -242,43 +250,53 @@ function renderMessage(container) {
   if (playerSum === 21) {
     if (dealerSum === 21) {
       container.innerText = "It's a draw!";
+      drawAudio.play();
       draw();
     } else if (dealerSum > 21) {
       container.innerText = "21! You beat the dealer!";
+      winnerAudio.play();
       winner();
     }
   }
   if (playerSum > 21 && dealerSum > 21) {
     container.innerText = "BUST!!";
+    loserAudio.play();
     loser();
   }
   if (playerSum > dealerSum) {
     if (playerSum <= 21) {
       container.innerText = "You won!";
+      winnerAudio.play();
       winner();
     } else if (playerSum > 21 && dealerSum <= 21) {
       container.innerText = "Bust! Dealer won.";
+      loserAudio.play();
       loser();
     }
   }
   if (playerSum < dealerSum) {
     if (dealerSum <= 21) {
       container.innerText = "Dealer won!";
+      loserAudio.play();
       loser();
     } else if (dealerSum > 21 && playerSum <= 21) {
       container.innerText = "Dealer bust. You won!";
+      winnerAudio.play();
       winner();
     } else if (playerSum > 21) {
       container.innerText = "BUST!!!";
+      loserAudio.play();
       loser();
     }
   }
   if (playerSum === dealerSum) {
     if (playerSum > 21 && dealerSum > 21) {
       container.innerText = "BUST!";
+      loserAudio.play();
       loser();
     } else if (playerSum <= 21) {
       container.innerText = "Draw!";
+      drawAudio.play();
       draw();
     }
   }
@@ -355,6 +373,7 @@ function addFive() {
     betEl.innerText = `BET-${bet}`;
     bankEl.innerText = `BANK-${bank}`;
   } else {
+    noMoreFundsAudio.play();
     messageEl.innerText = "Not enough funds!";
   }
 }
@@ -368,6 +387,7 @@ function addTen() {
     betEl.innerText = `BET-${bet}`;
     bankEl.innerText = `BANK-${bank}`;
   } else {
+    noMoreFundsAudio.play();
     messageEl.innerText = "Not enough funds!";
   }
 }
@@ -381,6 +401,7 @@ function addTwenty() {
     betEl.innerText = `BET-${bet}`;
     bankEl.innerText = `BANK-${bank}`;
   } else {
+    noMoreFundsAudio.play();
     messageEl.innerText = "Not enough funds!";
   }
 }
